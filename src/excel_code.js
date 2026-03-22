@@ -1,11 +1,11 @@
 const Exceljs = require('exceljs');
-const path = '../data/download.xlsx';
+const excelfilepath = '../data/download.xlsx';
 
 
 async function ExcelRead() {//await comews with the async function 
 const workbook = new Exceljs.Workbook();//create new workbook
 //read the file from the path and wait async for the file to be read before proceeding
-await workbook.xlsx.readFile(path);
+await workbook.xlsx.readFile(excelfilepath);
 
     const worksheet = workbook.getWorksheet('Sheet1');//get the sheet from the workbook
     worksheet.eachRow((row, rowNumber) => {//iterate through each row in the sheet
