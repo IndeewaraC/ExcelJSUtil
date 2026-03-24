@@ -1,8 +1,8 @@
-const { object01, excelfilepath} = require('../helper/helper.js');
-const Exceljs = require('exceljs');
+import {object01 } from '../helper/helper.js';
+import Exceljs from 'exceljs';
 
 
-async function ExcelWrite(searchtext,excelfilepath,replacevalue,change) {
+export async function ExcelWrite(searchtext,excelfilepath,replacevalue,change) {
     const workbook = new Exceljs.Workbook();
     await workbook.xlsx.readFile(excelfilepath);
     const worksheet = workbook.getWorksheet('Sheet1');
@@ -11,12 +11,10 @@ async function ExcelWrite(searchtext,excelfilepath,replacevalue,change) {
     //const cellvalue = worksheet.getCell(object01.row, object01.column); // Read location of the cell to be updated
     const cellvalue = worksheet.getCell(object01.row,object01.column+change.columnChange);
     cellvalue.value = replacevalue;
-
-
     await workbook.xlsx.writeFile(excelfilepath);//save file after writing
 }
 
-async function ExcelRead(worksheet, searchtext) {
+export async function ExcelRead(worksheet, searchtext) {
     worksheet.eachRow((row, rowNumber) => {//iterate through each row in the sheet
         row.eachCell((cell, colNumber) => {//iterate through each cell in the row
             //console.log(cell.value);//print the value of the cell
@@ -31,4 +29,5 @@ async function ExcelRead(worksheet, searchtext) {
     });
 }
 
-ExcelWrite("Mango",excelfilepath,350,{rowChange:0, columnChange:2});//column change is 2 is move 2 columns to the right 
+//ExcelWrite("Mango",excelfilepath,350,{rowChange:0, columnChange:2});//column change is 2 is move 2 columns to the right 
+

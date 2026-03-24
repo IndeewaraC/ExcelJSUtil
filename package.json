@@ -4,10 +4,13 @@
   "description": "ExcelJs",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module", 
   "main": "index.js",
   "dependencies": {
     "exceljs": "^4.4.0",
     "playwright": "^1.58.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
   }
 }
