@@ -1,12 +1,22 @@
-import { test,expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { downloadfilepath, url01 } from '../helper/helper.js';
 import { ExcelWrite } from './excel_code.js';
-import { textSearch,updatedvalue } from '../data/testdata.js';
+import { textSearch, updatedvalue } from '../data/testdata.js';
+import { DownloadPage } from '../pageObjects/DownloadPage.js';
+
+let pageobj;
+
+test.beforeEach(async ({ page }) => {
+    pageobj = new DownloadPage(page);
+});
 
 test('download excel file write Mango price to 350', async ({ page }) => {
-    await page.goto(url01, { timeout: 100000 });
+    pageobj.goto(url01);
     const downpromise = page.waitForEvent('download');//wait for the download event to complete
-    await page.getByRole('button', { name: 'Download' }).click();
+
+    //create new instance of the download page and click on the download button
+    pageobj.clickDownload();
+
     const download = await downpromise;//wait for the download event to complete
     await download.saveAs(downloadfilepath);//save the downloaded file and get the actual file path
     console.log(downloadfilepath);
@@ -14,10 +24,9 @@ test('download excel file write Mango price to 350', async ({ page }) => {
 });
 
 test('upload modified excel file and validate the change', async ({ page }) => {
-    await page.goto(url01);
-    //handle outside file upload dialog
-    await page.locator('#fileinput').setInputFiles(downloadfilepath);//gives the path of the local system.
-    //assertion to validate the change in the excel file
+    pageobj.goto(url01);
+
+    pageobj.uploadFile(downloadfilepath);//upload the modified file
 
     const toast = page.locator(".Toastify__toast-body");
     await expect(toast).toContainText("Updated Excel Data Successfully");
