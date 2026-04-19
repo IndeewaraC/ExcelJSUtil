@@ -1,7 +1,5 @@
 # 📊 Playwright Excel Automation (Data-Driven Testing)
 
-[![Playwright Tests](https://github.com/IndeewaraC/ExcelJSUtil/actions/workflows/playwright.yml/badge.svg)](#) *(Note: Replace with your actual GitHub Actions badge link once configured)*
-
 ## 💡 TL;DR & Business Value
 **The Problem:** Hardcoded test data leads to brittle automation suites, high maintenance overhead, and limits the ability to test complex edge cases at scale. 
 **The Solution:** This utility integrates `ExcelJS` with Playwright to enable true Data-Driven Testing (DDT). By externalizing test data into Excel spreadsheets, this framework allows for scalable test execution across massive datasets and empowers non-technical stakeholders (like Business Analysts or Product Managers) to contribute to test coverage without ever needing to touch the codebase.
